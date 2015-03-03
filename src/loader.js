@@ -14,7 +14,7 @@
 
     // attach your plugin to the global 'L' variable
     if(typeof window !== 'undefined' && window.L){
-        window.L.Locate = factory(L);
+        window.L.MarkerClusterGroup = factory(L);
     }
 
 } (function (L) {
