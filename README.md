@@ -1,7 +1,7 @@
 Leaflet-Marker-Cluster
 =====================
 
-Forked from [.eaflet.markercluster](https://github.com/Leaflet/Leaflet.markercluster).
+Forked from [Leaflet.markercluster](https://github.com/Leaflet/Leaflet.markercluster).
 
 ### Extra features
 * AMD/CommonJS support
