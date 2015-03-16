@@ -1,7 +1,4 @@
 (function (factory, window) {
-     // see https://github.com/Leaflet/Leaflet/blob/master/PLUGIN-GUIDE.md#module-loaders
-     // for details on how to structure a leaflet plugin.
-
     // define an AMD module that relies on 'leaflet'
     if (typeof define === 'function' && define.amd) {
         define(['leaflet'], factory);
@@ -17,7 +14,7 @@
 
     // attach your plugin to the global 'L' variable
     if(typeof window !== 'undefined' && window.L){
-        window.L.Locate = factory(L);
+        window.L.MarkerClusterGroup = factory(L);
     }
 
 } (function (L) {
@@ -640,18 +637,9 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
 	},
 
 	_zoomOrSpiderfy: function (e) {
-		var map = this._map;
-		if (map.getMaxZoom() === map.getZoom()) {
-			if (this.options.spiderfyOnMaxZoom) {
-				e.layer.spiderfy();
-			}
-		} else if (this.options.zoomToBoundsOnClick) {
-			e.layer.zoomToBounds();
-		}
-
     // Focus the map again for keyboard users.
 		if (e.originalEvent && e.originalEvent.keyCode === 13) {
-			map._container.focus();
+			this._map._container.focus();
 		}
 	},
 
