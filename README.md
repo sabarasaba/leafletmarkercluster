@@ -5,8 +5,7 @@ Forked from [Leaflet.markercluster](https://github.com/Leaflet/Leaflet.markerclu
 
 ### Extra features
 * AMD/CommonJS support
-* Ability to customize cluster actions depending on the accuracy of the child pins.
-* Exposes more events: `onClusterClick`, `onClusterTransitionFinished`
+* Leverage clusterClick action to users.
 
 
 ### Usage

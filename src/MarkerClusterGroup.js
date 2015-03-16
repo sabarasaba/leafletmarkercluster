@@ -618,48 +618,9 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
 	},
 
 	_zoomOrSpiderfy: function (e) {
-		var map = this._map;
-
-		if (map.getMaxZoom() === map.getZoom()) {
-		  if (this.options.spiderfyOnMaxZoom) {
-		    console.log('Will spiderfy !');
-		    console.log(e.layer);
-		    e.layer.spiderfy();
-		  }
-		} else if (this.options.zoomToBoundsOnClick) {
-		  console.log('Will zoom in to marker');
-		  console.log(e.layer);
-		  var flaged = 0;
-
-		  var searchAnomalies = function(layers) {
-		    if (!_.isEmpty(layers._markers)) {
-		      _.each(layers._markers, function(e) {
-		        if (e.options.accuracy <= 7) {
-		          flaged++;
-		        }
-		      });
-		    }
-
-		    if (!_.isEmpty(layers._childClusters)) {
-		      _.each(layers._childClusters, function(layer) {
-		        searchAnomalies(layer);
-		      });
-		    }
-		  };
-
-		  searchAnomalies(e.layer);
-		  console.log('Elements flaged: ' + flaged);
-
-		  if (flaged > 0) {
-		    console.log('SHOW IN LIST => ' + flaged + ' LISTINGS + OFFSET');
-		  } else {
-		    e.layer.zoomToBounds();
-		  }
-		}
-
     // Focus the map again for keyboard users.
 		if (e.originalEvent && e.originalEvent.keyCode === 13) {
-			map._container.focus();
+			this._map._container.focus();
 		}
 	},
 
