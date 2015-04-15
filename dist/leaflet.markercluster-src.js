@@ -1867,7 +1867,7 @@ L.MarkerCluster.include(!L.DomUtil.TRANSITION ? {
 			if (m.setOpacity) {
 				m.setZIndexOffset(1000000); //Make these appear on top of EVERYTHING
 				m.setOpacity(0);
-
+			
 				fg.addLayer(m);
 
 				m._setPos(thisLayerPos);
@@ -1891,7 +1891,7 @@ L.MarkerCluster.include(!L.DomUtil.TRANSITION ? {
 			//Move marker to new position
 			m._preSpiderfyLatlng = m._latlng;
 			m.setLatLng(newPos);
-
+			
 			if (m.setOpacity) {
 				m.setOpacity(1);
 			}

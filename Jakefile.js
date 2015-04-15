@@ -15,12 +15,11 @@ For a custom build, open build/build.html in the browser and follow the instruct
 var build = require('./build/build.js');
 
 desc('Check Leaflet.markercluster source for errors with JSHint');
-task('lint', build.lint);
 
 desc('Combine and compress Leaflet.markercluster source files');
-task('build', ['lint'], build.build);
+task('build', build.build);
 
 desc('Run PhantomJS tests');
-task('test', ['lint'], build.test);
+task('test',  build.test);
 
 task('default', ['build']);
