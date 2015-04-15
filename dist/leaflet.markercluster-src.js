@@ -645,22 +645,35 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
 
 	_showCoverage: function (e) {
 		var map = this._map;
+
 		if (this._inZoomAnimation) {
 			return;
 		}
-		if (this._shownPolygon) {
-			map.removeLayer(this._shownPolygon);
+
+		if (this._shownArea) {
+			map.removeLayer(this._shownArea);
 		}
+
 		if (e.layer.getChildCount() > 2 && e.layer !== this._spiderfied) {
-			this._shownPolygon = new L.Polygon(e.layer.getConvexHull(), this.options.polygonOptions);
-			map.addLayer(this._shownPolygon);
+		  var bbMarkers = L.featureGroup(e.layer.getAllChildMarkers());
+		  var boundingBox = bbMarkers.getBounds();
+		  var center = boundingBox.getCenter();
+
+		  this._shownArea = new L.circle(e.latlng, center.distanceTo(boundingBox.getNorthEast()), {
+		    fill: true,
+		    fillColor: '#000000',
+		    opacity: '.7',
+		    stroke: false
+		  });
+
+		  map.addLayer(this._shownArea);
 		}
 	},
 
 	_hideCoverage: function () {
-		if (this._shownPolygon) {
-			this._map.removeLayer(this._shownPolygon);
-			this._shownPolygon = null;
+		if (this._shownArea) {
+			this._map.removeLayer(this._shownArea);
+			this._shownArea = null;
 		}
 	},
 
@@ -1854,7 +1867,7 @@ L.MarkerCluster.include(!L.DomUtil.TRANSITION ? {
 			if (m.setOpacity) {
 				m.setZIndexOffset(1000000); //Make these appear on top of EVERYTHING
 				m.setOpacity(0);
-			
+
 				fg.addLayer(m);
 
 				m._setPos(thisLayerPos);
@@ -1878,7 +1891,7 @@ L.MarkerCluster.include(!L.DomUtil.TRANSITION ? {
 			//Move marker to new position
 			m._preSpiderfyLatlng = m._latlng;
 			m.setLatLng(newPos);
-			
+
 			if (m.setOpacity) {
 				m.setOpacity(1);
 			}

@@ -1,5 +1,6 @@
 {
   "name": "leaflet-marker-cluster",
   "version": "1.0.0",
+  "main": "dist/leaflet.markercluster.js",
   "ignore": []
 }
